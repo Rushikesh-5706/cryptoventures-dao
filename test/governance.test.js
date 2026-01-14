@@ -8,7 +8,7 @@ describe("CryptoVentures DAO Governance", function () {
   beforeEach(async function () {
     [admin, alice, bob] = await ethers.getSigners();
 
-    const Roles = await ethers.getContractFactory("CVRoles");
+    const Roles = await ethers.getContractFactory("contracts/access/CVRoles.sol:CVRoles");
     roles = await Roles.deploy(admin.address);
     await roles.waitForDeployment();
 
@@ -20,7 +20,7 @@ describe("CryptoVentures DAO Governance", function () {
     config = await Config.deploy();
     await config.waitForDeployment();
 
-    const Treasury = await ethers.getContractFactory("CVTreasury");
+    const Treasury = await ethers.getContractFactory("contracts/treasury/CVTreasury.sol:CVTreasury");
     treasury = await Treasury.deploy(admin.address);
     await treasury.waitForDeployment();
 

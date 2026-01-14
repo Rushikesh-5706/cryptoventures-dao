@@ -1,21 +1,36 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/**
+ * @title CVDelegationFixed
+ * @notice Allows DAO members to delegate their voting power to another address
+ * @dev Delegated voting power is automatically included when the delegate votes
+ */
 contract CVDelegationFixed {
+
+    /// @notice Mapping of delegator → delegate
     mapping(address => address) public delegateOf;
-    mapping(address => uint256) public receivedPower;
 
+    /// @notice Emitted when delegation changes
     event Delegated(address indexed from, address indexed to);
-    event Revoked(address indexed from);
 
+    /**
+     * @notice Assigns voting power to another address
+     * @dev Only one active delegate is allowed; setting to address(0) clears delegation
+     * @param to Address that will receive voting power
+     */
     function delegate(address to) external {
-        require(to != msg.sender, "Self");
         delegateOf[msg.sender] = to;
         emit Delegated(msg.sender, to);
     }
 
-    function revoke() external {
+    /**
+     * @notice Clears any existing delegation
+     * @dev Restores voting power back to the original holder
+     */
+    function clearDelegation() external {
         delegateOf[msg.sender] = address(0);
-        emit Revoked(msg.sender);
+        emit Delegated(msg.sender, address(0));
     }
 }
+
