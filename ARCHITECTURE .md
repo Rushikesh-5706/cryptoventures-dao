@@ -94,7 +94,7 @@ sequenceDiagram
 
 ---
 
-## Deployment checklist for evaluators
+## Deployment checklist 
 
 1. `npm ci`  
 2. `npx hardhat node`  
