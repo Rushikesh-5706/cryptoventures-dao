@@ -7,7 +7,7 @@ This system is inspired by production governance models used by protocols like C
 
 ---
 
-## 🧩 Governance Architecture
+## Governance Architecture
 
 The DAO is built around four core components:
 
@@ -34,7 +34,7 @@ graph TD
 
 ---
 
-## 🔁 Proposal Lifecycle
+## Proposal Lifecycle
 
 Every proposal follows a strict state machine:
 
@@ -52,7 +52,7 @@ Pending → Active → Queued → Executed
 
 ---
 
-## 🧑‍💼 Roles
+## Roles
 
 | Role | Purpose |
 |------|--------|
@@ -64,7 +64,7 @@ Roles are enforced on‑chain via `CVRoles`.
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1️⃣ Install Dependencies
 
@@ -137,7 +137,7 @@ All governance, quorum, delegation, timelock, and treasury tests must pass.
 
 ---
 
-## 📸 Verification Screenshots
+## Verification Screenshots
 
 ### Compile
 ![Compile](screenshots/1_compile.png)
@@ -167,7 +167,7 @@ DAO running inside a Docker container exposing the Hardhat RPC.
 
 ---
 
-## 🧪 Usage Examples
+## Usage Examples
 
 ### Deposit ETH
 
@@ -215,7 +215,7 @@ await governor.execute(1);
 
 ---
 
-## 🧠 Design Decisions
+## Design Decisions
 
 - **Quadratic voting** reduces whale dominance  
 - **Delegation** enables passive members to participate  
@@ -224,13 +224,13 @@ await governor.execute(1);
 
 ---
 
-## 📦 Docker
+## Docker
 
 The DAO runs inside a reproducible Docker container exposing port `8545` for RPC access.
 
 ---
 
-## 🎥 Demo
+## Demo
 
 A full walkthrough video demonstrates:
 - Deposits
