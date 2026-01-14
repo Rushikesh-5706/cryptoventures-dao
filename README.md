@@ -168,7 +168,6 @@ If cancelled, execution will fail.
 
 - `scripts/deploy.ts` — Deploys all contracts and sets roles.
 - `scripts/seed.ts` — Seeds the network with test deposits, sample proposals and role grants used by tests/demo.
-- `scripts/phase2_check.ts` — Internal utility that runs a quick flow and assertions for Phase 2.
 
 Run with:
 ```bash
