@@ -65,6 +65,87 @@ Roles are enforced on‑chain via `CVRoles`.
 ---
 
 ## Setup Instructions
+## Dockerized One-Command Local Blockchain (Recommended)
+
+This project includes a prebuilt Docker image that runs a fully configured Hardhat blockchain with funded accounts.  
+This avoids all local Hardhat issues and guarantees the same environment used during testing.
+
+### Step A — Start the blockchain
+
+Open a terminal and run:
+
+```bash
+docker pull rushi5706/cryptoventures-dao
+docker run --rm -p 8545:8545 rushi5706/cryptoventures-dao:latest
+```
+
+You should see output like:
+
+```bash
+Started HTTP and WebSocket JSON-RPC server at http://0.0.0.0:8545/
+Account #0: ...
+Account #1: ...
+```
+
+Leave this terminal running.
+
+Step B — Verify the blockchain is live
+
+Open a second terminal and run:
+
+```bash
+curl -X POST http://127.0.0.1:8545 \
+  -H "Content-Type: application/json" \
+  --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
+```
+
+Expected output:
+
+```bash
+{"jsonrpc":"2.0","id":1,"result":"0x7a69"}
+```
+
+This confirms the Docker blockchain is working.
+
+Step C — Deploy the DAO
+
+In the project folder:
+
+```bash
+cp .env.example .env
+npx hardhat run scripts/deploy.ts --network localhost
+```
+
+This deploys all governance, treasury, timelock, and role contracts.
+
+Step D — Seed test state
+
+```bash
+npx hardhat run scripts/seed.ts --network localhost
+```
+
+This creates:
+
+Members
+
+Stakes
+
+Delegations
+
+Proposals
+
+Votes
+
+Step E — Run all tests
+
+```bash
+npx hardhat test
+```
+
+All tests must pass.
+
+
+---
 
 ### 1️⃣ Install Dependencies
 
