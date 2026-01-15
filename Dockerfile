@@ -1,12 +1,15 @@
-FROM node:18
+FROM node:20-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
 
 COPY . .
 
+RUN npx hardhat compile
+
 EXPOSE 8545
 
-CMD ["npx", "hardhat", "node"]
+CMD ["npx", "hardhat", "node", "--hostname", "0.0.0.0"]
+
