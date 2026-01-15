@@ -1,7 +1,8 @@
 import { ethers } from "hardhat";
+import fs from "fs";
 
 async function main() {
-  const [admin, alice, bob] = await ethers.getSigners();
+  const [admin, alice] = await ethers.getSigners();
 
   const Roles = await ethers.getContractFactory("contracts/access/CVRoles.sol:CVRoles");
   const roles = await Roles.deploy(admin.address);
@@ -29,18 +30,24 @@ async function main() {
   await gov.waitForDeployment();
 
   await treasury.grantGovernance(await gov.getAddress());
-
   await roles.grantRole(await roles.PROPOSER_ROLE(), alice.address);
   await roles.grantRole(await roles.EXECUTOR_ROLE(), admin.address);
   await roles.grantRole(await roles.GUARDIAN_ROLE(), admin.address);
 
-  console.log("Roles:", await roles.getAddress());
-  console.log("Timelock:", await timelock.getAddress());
-  console.log("Treasury:", await treasury.getAddress());
-  console.log("Governor:", await gov.getAddress());
+  const data = {
+    roles: await roles.getAddress(),
+    timelock: await timelock.getAddress(),
+    treasury: await treasury.getAddress(),
+    governor: await gov.getAddress()
+  };
+
+  fs.writeFileSync("deployments/localhost.json", JSON.stringify(data, null, 2));
+
+  console.log("Deployed and saved:", data);
 }
 
 main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
+
