@@ -313,6 +313,8 @@ The DAO runs inside a reproducible Docker container exposing port `8545` for RPC
 
 ## Demo
 
+    https://drive.google.com/file/d/1VwERekxw3hSO8TgNAkd6kEXN93T3JNbc/view?usp=sharing
+
 A full walkthrough video demonstrates:
 - Deposits
 - Proposals
